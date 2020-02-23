@@ -1,7 +1,11 @@
 import dweepy # Import the dweepy module
 import time # Import the time module
-
+import grovepi # Import the grovepi module
+from grovepi import * # Import everything from the grovepi module
 from threading import Thread # Import the Thread class from the threading module
+
+dht_sensor = 7 # Connect the DHT sensor to digital port D7
+dht_sensor_type = 0 # Use 0 for the blue-colored sensor
 
 publisher_state = False # Set the publisher state to false. This is used in the while loop in the publish() method
 
@@ -25,7 +29,10 @@ def publish(): # The publish() method takes no parameters
     num = 0 # Set a variable called num to 0
     print(publisher_thread_name + " is Publishing!") # Print Starting Publishing!
     while publisher_state: # While publisher state is true execute the following code
-        result = dweepy.dweet_for('TestThing', {"TestNum": num}) # Send a dweet from a specific thing called TestThing with a key of TestNum and value of the variable called num and store it in a variable called result
+        [ temp_sensor_value,hum_sensor_value ] = dht(dht_sensor,dht_sensor_type) # Read the temperature and humidity sensor values
+        temperature = str(temp_sensor_value) # Convert temperature sensor value to a String and store in a variable called temperature
+        humidity = str(hum_sensor_value) # Convert humidity sensor value to a String and store in a variable called humidity
+        result = dweepy.dweet_for('TestThing', {"Temperature": temperature, "Humidity": humidity}) # Send a dweet from a specific thing called TestThing with a key of TestNum and value of the variable called num and store it in a variable called result
         print(result) # Print the variable called result
         time.sleep(1) # Call the sleep() method from the time module and pass in 1 second as a parameter
         num = num + 1 # Increment the variable called num by 1
