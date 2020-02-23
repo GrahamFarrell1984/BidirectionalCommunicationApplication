@@ -1,0 +1,2 @@
+# BidirectionalCommunicationApplication
+Python application demonstrating bidirectional communication
