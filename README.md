@@ -5,4 +5,4 @@ Python application demonstrating bidirectional communication
 
 * Clone this repo
 * Run `pip install dweepy` in the BidirectionalCommunicationApplication directory
-* Run `python sender_and_receiver.py` in the BidirectionalCommunicationApplication directory to run script
+* Run `python sender_and_receiver.py` in the BidirectionalCommunicationApplication directory to run the script
