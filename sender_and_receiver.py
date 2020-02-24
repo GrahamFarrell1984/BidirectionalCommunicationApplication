@@ -20,8 +20,9 @@ def listen(publisher_thread): # The listen() method takes the publisher thread a
     for dweet in dweepy.listen_for_dweets_from('TestThing'): # For loop listens for dweets from a specific thing called TestThing
         content = dweet["content"] # Store the content from each dweet into a variable called content
         thing = dweet["thing"] # Store the thing from each dweet into a variable called thing
-        print(content) # Print the variable called content
+        print("Reading from " + listener_thread_name + ": " + str(content)) # Print the variable called content
         print(thing) # Print the variable called thing
+        print("")
     print("Listening Ending!") # Print Listening Ending!
 
 # Method to publish dweets from a specific thing called TestThing
@@ -36,6 +37,7 @@ def publish(): # The publish() method takes no parameters
         print(result) # Print the variable called result
         time.sleep(1) # Call the sleep() method from the time module and pass in 1 second as a parameter
         num = num + 1 # Increment the variable called num by 1
+        print("")
     print("Publishing Ending!") # Print Publishing Ending!
 
 publisher_thread = Thread(target=publish) # Create a new publisher thread passing in the publish() method as a parameter
