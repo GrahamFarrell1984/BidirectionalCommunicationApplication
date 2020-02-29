@@ -10,4 +10,9 @@ Python application demonstrating bidirectional communication
 
 ## Steps to SSH into Raspberry Pi
 
-* Run `ssh pi@raspberrypi.local` from any directory
+* Run `ssh pi@raspberrypi.local` from any directory on your local machine
+* Enter your password when prompted
+
+## Steps to shutdown Raspberry Pi
+
+* Run `sudo shutdown -h now` from any directory on the Pi
