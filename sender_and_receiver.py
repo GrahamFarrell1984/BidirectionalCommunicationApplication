@@ -9,15 +9,15 @@ dht_sensor_type = 0 # Use 0 for the blue-colored sensor
 
 publisher_state = False # Set the publisher state to false. This is used in the while loop in the publish() method
 
-# Method to listen for dweets from a specific thing called TestThing
+# Method to listen for dweets from a specific thing called TestThingTwo
 def listen(publisher_thread): # The listen() method takes the publisher thread as a parameter
     print(listener_thread_name + " is Listening!") # Print Starting Listening!
     global publisher_state # Set publisher state as a global variable
     publisher_state = True # Set publisher state to true
     if not publisher_thread.is_alive(): # If publisher thread is not running execute the following code
-        publisher_thread = Thread(target=publish) # Create a new publisher thread passing in the publish() method as a parameter
+        #publisher_thread = Thread(target=publish) # Create a new publisher thread passing in the publish() method as a parameter
         publisher_thread.start() # Start publisher thread
-    for dweet in dweepy.listen_for_dweets_from('TestThing'): # For loop listens for dweets from a specific thing called TestThing
+    for dweet in dweepy.listen_for_dweets_from('TestThingTwo'): # For loop listens for dweets from a specific thing called TestThingTwo
         content = dweet["content"] # Store the content from each dweet into a variable called content
         thing = dweet["thing"] # Store the thing from each dweet into a variable called thing
         print("Reading from " + listener_thread_name + ": " + str(content)) # Print the variable called content
@@ -25,7 +25,7 @@ def listen(publisher_thread): # The listen() method takes the publisher thread a
         print("")
     print("Listening Ending!") # Print Listening Ending!
 
-# Method to publish dweets from a specific thing called TestThing
+# Method to publish dweets from a specific thing called TestThingOne
 def publish(): # The publish() method takes no parameters
     num = 0 # Set a variable called num to 0
     print(publisher_thread_name + " is Publishing!") # Print Starting Publishing!
@@ -33,7 +33,7 @@ def publish(): # The publish() method takes no parameters
         [ temp_sensor_value,hum_sensor_value ] = dht(dht_sensor,dht_sensor_type) # Read the temperature and humidity sensor values
         temperature = str(temp_sensor_value) # Convert temperature sensor value to a String and store in a variable called temperature
         humidity = str(hum_sensor_value) # Convert humidity sensor value to a String and store in a variable called humidity
-        result = dweepy.dweet_for('TestThing', {"Temperature": temperature, "Humidity": humidity}) # Send a dweet from a specific thing called TestThing with a key of TestNum and value of the variable called num and store it in a variable called result
+        result = dweepy.dweet_for('TestThingOne', {"Temperature": temperature, "Humidity": humidity}) # Send a dweet from a specific thing called TestThingOne with a key of TestNum and value of the variable called num and store it in a variable called result
         print(result) # Print the variable called result
         time.sleep(1) # Call the sleep() method from the time module and pass in 1 second as a parameter
         num = num + 1 # Increment the variable called num by 1
