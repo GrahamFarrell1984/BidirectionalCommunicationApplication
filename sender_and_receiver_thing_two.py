@@ -15,11 +15,6 @@ grovepi.pinMode(light_sensor,"INPUT") # Set pin mode for port A0 as an input
 
 publisher_state = False # Set the publisher state to false. This is used in the while loop in the publish() method
 
-def read_temperature():
-    [ temp_sensor_value,hum_sensor_value ] = dht(dht_sensor,dht_sensor_type) # Read the temperature and humidity sensor values
-    temperature = str(temp_sensor_value) # Convert temperature sensor value to a String and store in a variable called temperature
-    return temperature
-
 def read_humidity():
     [ temp_sensor_value,hum_sensor_value ] = dht(dht_sensor,dht_sensor_type) # Read the temperature and humidity sensor values
     humidity = str(hum_sensor_value) # Convert humidity sensor value to a String and store in a variable called humidity
@@ -50,10 +45,9 @@ def publish(): # The publish() method takes no parameters
     num = 0 # Set a variable called num to 0
     print(publisher_thread_name + " is Publishing!") # Print Starting Publishing!
     while publisher_state: # While publisher state is true execute the following code
-        temperature = read_temperature()
         humidity = read_humidity()
         light = read_light()
-        result = dweepy.dweet_for(thingTwoName, {"Temperature": temperature, "Humidity": humidity, "Light": light}) # Send a dweet from a specific thing called TestThingTwo and store it in a variable called result
+        result = dweepy.dweet_for(thingTwoName, {"Humidity": humidity, "Light": light}) # Send a dweet from a specific thing called TestThingTwo and store it in a variable called result
         print("TestThingTwo published: " + str(result)) # Print the variable called result
         time.sleep(1) # Call the sleep() method from the time module and pass in 1 second as a parameter
         num = num + 1 # Increment the variable called num by 1
