@@ -10,8 +10,8 @@ from config import thingTwoName # Import thingTwoName from the configuration fil
 dht_sensor = 7 # Connect the DHT sensor to digital port D7
 dht_sensor_type = 0 # Use 0 for the blue-colored sensor
 
-sound_sensor = 1 # Connect the Grove Sound Sensor to analog port A1
-grovepi.pinMode(sound_sensor,"INPUT") # Set pin mode for port A1 as an input
+sound_sensor = 2 # Connect the Grove Sound Sensor to analog port A2
+grovepi.pinMode(sound_sensor,"INPUT") # Set pin mode for port A2 as an input
 
 publisher_state = False # Set the publisher state to false. This is used in the while loop in the publish() method
 
