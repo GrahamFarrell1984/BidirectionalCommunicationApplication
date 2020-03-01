@@ -10,6 +10,9 @@ from config import thingTwoName # Import thingTwoName from the configuration fil
 dht_sensor = 8 # Connect the DHT sensor to digital port D8
 dht_sensor_type = 0 # Use 0 for the blue-colored sensor
 
+light_sensor = 0 # Connect the Grove Light Sensor to analog port A0
+grovepi.pinMode(light_sensor,"INPUT") # Set pin mode for port A0 as an input
+
 publisher_state = False # Set the publisher state to false. This is used in the while loop in the publish() method
 
 def read_temperature():
@@ -21,6 +24,10 @@ def read_humidity():
     [ temp_sensor_value,hum_sensor_value ] = dht(dht_sensor,dht_sensor_type) # Read the temperature and humidity sensor values
     humidity = str(hum_sensor_value) # Convert humidity sensor value to a String and store in a variable called humidity
     return humidity
+
+def read_light():
+    light_sensor_value = grovepi.analogRead(light_sensor) # Read the light sensor value and store it in a variable called light_sensor_value
+    return light_sensor_value # Return the value from the light sensor
 
 # Method to listen for dweets from a specific thing called TestThingOne
 def listen(publisher_thread): # The listen() method takes the publisher thread as a parameter
@@ -45,7 +52,8 @@ def publish(): # The publish() method takes no parameters
     while publisher_state: # While publisher state is true execute the following code
         temperature = read_temperature()
         humidity = read_humidity()
-        result = dweepy.dweet_for(thingTwoName, {"Temperature": temperature, "Humidity": humidity}) # Send a dweet from a specific thing called TestThingTwo and store it in a variable called result
+        light = read_light()
+        result = dweepy.dweet_for(thingTwoName, {"Temperature": temperature, "Humidity": humidity, "Light": light}) # Send a dweet from a specific thing called TestThingTwo and store it in a variable called result
         print("TestThingTwo published: " + str(result)) # Print the variable called result
         time.sleep(1) # Call the sleep() method from the time module and pass in 1 second as a parameter
         num = num + 1 # Increment the variable called num by 1
