@@ -12,12 +12,10 @@ publisher_state = False # Set the publisher state to false. This is used in the 
 def read_temperature():
     [ temp_sensor_value,hum_sensor_value ] = dht(dht_sensor,dht_sensor_type) # Read the temperature and humidity sensor values
     temperature = str(temp_sensor_value) # Convert temperature sensor value to a String and store in a variable called temperature
-    # humidity = str(hum_sensor_value) # Convert humidity sensor value to a String and store in a variable called humidity
     return temperature
 
 def read_humidity():
     [ temp_sensor_value,hum_sensor_value ] = dht(dht_sensor,dht_sensor_type) # Read the temperature and humidity sensor values
-    # temperature = str(temp_sensor_value) # Convert temperature sensor value to a String and store in a variable called temperature
     humidity = str(hum_sensor_value) # Convert humidity sensor value to a String and store in a variable called humidity
     return humidity
 
@@ -27,15 +25,10 @@ def listen(publisher_thread): # The listen() method takes the publisher thread a
     global publisher_state # Set publisher state as a global variable
     publisher_state = True # Set publisher state to true
     if not publisher_thread.is_alive(): # If publisher thread is not running execute the following code
-        # publisher_thread = Thread(target=publish) # Create a new publisher thread passing in the publish() method as a parameter
         publisher_thread.start() # Start publisher thread
     for dweet in dweepy.listen_for_dweets_from('TestThingTwo'): # For loop listens for dweets from a specific thing called TestThingTwo
         content = dweet["content"] # Store the content from each dweet into a variable called content
         thing = dweet["thing"] # Store the thing from each dweet into a variable called thing
-        # temperature = dweet.content["Temperature"]
-        # humidity = dweet.content["Humidity"]
-        # print(temperature)
-        # print(humidity)
         # print("Reading from " + listener_thread_name + ": " + str(content)) # Print the variable called content
         print("Reading from TestThingTwo: " + str(content))
         print(thing) # Print the variable called thing
@@ -47,9 +40,6 @@ def publish(): # The publish() method takes no parameters
     num = 0 # Set a variable called num to 0
     print(publisher_thread_name + " is Publishing!") # Print Starting Publishing!
     while publisher_state: # While publisher state is true execute the following code
-        # [ temp_sensor_value,hum_sensor_value ] = dht(dht_sensor,dht_sensor_type) # Read the temperature and humidity sensor values
-        # temperature = str(temp_sensor_value) # Convert temperature sensor value to a String and store in a variable called temperature
-        # humidity = str(hum_sensor_value) # Convert humidity sensor value to a String and store in a variable called humidity
         temperature = read_temperature()
         humidity = read_humidity()
         result = dweepy.dweet_for('TestThingOne', {"Temperature": temperature, "Humidity": humidity}) # Send a dweet from a specific thing called TestThingOne with a key of TestNum and value of the variable called num and store it in a variable called result
