@@ -20,8 +20,8 @@ def listen(publisher_thread): # The listen() method takes the publisher thread a
     for dweet in dweepy.listen_for_dweets_from('TestThingOne'): # For loop listens for dweets from a specific thing called TestThingOne
         content = dweet["content"] # Store the content from each dweet into a variable called content
         thing = dweet["thing"] # Store the thing from each dweet into a variable called thing
-        temperature = dweet["Temperature"]
-        humidity = dweet["Humidity"]
+        temperature = dweet.content["Temperature"]
+        humidity = dweet.content["Humidity"]
         print(temperature)
         print(humidity)
         print("Reading from " + listener_thread_name + ": " + str(content)) # Print the variable called content
