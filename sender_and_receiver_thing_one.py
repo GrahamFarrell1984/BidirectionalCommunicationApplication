@@ -26,7 +26,7 @@ def listen(publisher_thread): # The listen() method takes the publisher thread a
     publisher_state = True # Set publisher state to true
     if not publisher_thread.is_alive(): # If publisher thread is not running execute the following code
         publisher_thread.start() # Start publisher thread
-    for dweet in dweepy.listen_for_dweets_from('TestThingTwo'): # For loop listens for dweets from a specific thing called TestThingTwo
+    for dweet in dweepy.listen_for_dweets_from(config.ThingTwoName): # For loop listens for dweets from a specific thing called TestThingTwo
         content = dweet["content"] # Store the content from each dweet into a variable called content
         thing = dweet["thing"] # Store the thing from each dweet into a variable called thing
         # print("Reading from " + listener_thread_name + ": " + str(content)) # Print the variable called content
@@ -42,7 +42,7 @@ def publish(): # The publish() method takes no parameters
     while publisher_state: # While publisher state is true execute the following code
         temperature = read_temperature()
         humidity = read_humidity()
-        result = dweepy.dweet_for('TestThingOne', {"Temperature": temperature, "Humidity": humidity}) # Send a dweet from a specific thing called TestThingOne with a key of TestNum and value of the variable called num and store it in a variable called result
+        result = dweepy.dweet_for(config.ThingOneName, {"Temperature": temperature, "Humidity": humidity}) # Send a dweet from a specific thing called TestThingOne with a key of TestNum and value of the variable called num and store it in a variable called result
         print("TestThingOne published: " + str(result)) # Print the variable called result
         time.sleep(1) # Call the sleep() method from the time module and pass in 1 second as a parameter
         num = num + 1 # Increment the variable called num by 1

@@ -1,0 +1,2 @@
+thingOneName = 'TestThingOne'
+thingTwoName = 'TestThingTwo'
