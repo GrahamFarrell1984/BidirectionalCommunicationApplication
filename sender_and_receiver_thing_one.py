@@ -34,7 +34,7 @@ def publish(): # The publish() method takes no parameters
         temperature = str(temp_sensor_value) # Convert temperature sensor value to a String and store in a variable called temperature
         humidity = str(hum_sensor_value) # Convert humidity sensor value to a String and store in a variable called humidity
         result = dweepy.dweet_for('TestThingOne', {"Temperature": temperature, "Humidity": humidity}) # Send a dweet from a specific thing called TestThingOne with a key of TestNum and value of the variable called num and store it in a variable called result
-        print(result) # Print the variable called result
+        print("TestThingOne published: " + result) # Print the variable called result
         time.sleep(1) # Call the sleep() method from the time module and pass in 1 second as a parameter
         num = num + 1 # Increment the variable called num by 1
         print("")
