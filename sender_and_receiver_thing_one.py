@@ -4,6 +4,8 @@ import grovepi # Import the grovepi module
 from grovepi import * # Import everything from the grovepi module
 from threading import Thread # Import the Thread class from the threading module
 
+import config # Import the configuration file
+
 dht_sensor = 7 # Connect the DHT sensor to digital port D7
 dht_sensor_type = 0 # Use 0 for the blue-colored sensor
 
