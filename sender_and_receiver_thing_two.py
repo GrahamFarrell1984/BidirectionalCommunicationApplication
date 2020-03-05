@@ -13,6 +13,15 @@ dht_sensor_type = 0 # Use 0 for the blue-colored sensor
 light_sensor = 0 # Connect the Grove Light Sensor to analog port A0
 grovepi.pinMode(light_sensor,"INPUT") # Set pin mode for port A0 as an input
 
+led = 5 # Connect the LED to digital port D5
+grovepi.pinMode(led,"OUTPUT") # Set pin mode for port D5 as an input
+
+adc_ref = 5 # Reference voltage of ADC is 5v
+
+grove_vcc = 5 # Vcc of the grove interface is normally 5v
+
+full_angle = 300 # Full value of the rotary angle is 300 degrees, as per it's specs (0 to 300)
+
 publisher_state = False # Set the publisher state to false. This is used in the while loop in the publish() method
 
 def read_humidity():
@@ -33,11 +42,18 @@ def listen(publisher_thread): # The listen() method takes the publisher thread a
         publisher_thread.start() # Start publisher thread
     for dweet in dweepy.listen_for_dweets_from(thingOneName): # For loop listens for dweets from a specific thing called TestThingOne
         content = dweet["content"] # Store the content from each dweet into a variable called content
+        sensor_value = content["Potentiometer"]
+        print("Potentiometer Reading: " + str(sensor_value))
         thing = dweet["thing"] # Store the thing from each dweet into a variable called thing
         # print("Reading from " + listener_thread_name + ": " + str(content)) # Print the variable called content
         print("Reading from TestThingOne: " + str(content))
         print(thing) # Print the variable called thing
         print("")
+        voltage = round((float)(sensor_value) * adc_ref / 1023, 2) # Calculate voltage
+        degrees = round((voltage * full_angle) / grove_vcc, 2) # Calculate rotation in degrees (0 to 300)
+        brightness = int(degrees / full_angle * 255) # Calculate LED brightess (0 to 255) from degrees (0 to 300)
+        grovepi.analogWrite(led,brightness) # Give PWM output to LED
+
     print("Listening Ending!") # Print Listening Ending!
 
 # Method to publish dweets from a specific thing called TestThingTwo
@@ -47,7 +63,7 @@ def publish(): # The publish() method takes no parameters
     while publisher_state: # While publisher state is true execute the following code
         humidity = read_humidity()
         light = read_light()
-        result = dweepy.dweet_for(thingTwoName, {"Humidity": humidity, "Light": light}) # Send a dweet from a specific thing called TestThingTwo and store it in a variable called result
+        result = dweepy.dweet_for(thingTwoName, {"Humidity": humidity, "Light": light}) # Send a dweet from a specific thing called TestThin$
         print("TestThingTwo published: " + str(result)) # Print the variable called result
         time.sleep(1) # Call the sleep() method from the time module and pass in 1 second as a parameter
         num = num + 1 # Increment the variable called num by 1
@@ -55,7 +71,7 @@ def publish(): # The publish() method takes no parameters
     print("Publishing Ending!") # Print Publishing Ending!
 
 publisher_thread = Thread(target=publish) # Create a new publisher thread passing in the publish() method as a parameter
-listener_thread = Thread(target=listen, args=(publisher_thread,)) # Create a new listener thread passing in the listen() method and publisher thread as parameters
+listener_thread = Thread(target=listen, args=(publisher_thread,)) # Create a new listener thread passing in the listen() method and publishe$
 
 publisher_thread_name = publisher_thread.getName() # Get publisher thread name
 listener_thread_name = listener_thread.getName() # Get listener thread name
