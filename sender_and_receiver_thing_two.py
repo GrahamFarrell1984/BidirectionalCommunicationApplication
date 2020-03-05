@@ -45,7 +45,6 @@ def listen(publisher_thread): # The listen() method takes the publisher thread a
         sensor_value = content["Potentiometer"]
         print("Potentiometer Reading: " + str(sensor_value))
         thing = dweet["thing"] # Store the thing from each dweet into a variable called thing
-        # print("Reading from " + listener_thread_name + ": " + str(content)) # Print the variable called content
         print("Reading from TestThingOne: " + str(content))
         print(thing) # Print the variable called thing
         print("")
@@ -58,7 +57,6 @@ def listen(publisher_thread): # The listen() method takes the publisher thread a
 
 # Method to publish dweets from a specific thing called TestThingTwo
 def publish(): # The publish() method takes no parameters
-    num = 0 # Set a variable called num to 0
     print(publisher_thread_name + " is Publishing!") # Print Starting Publishing!
     while publisher_state: # While publisher state is true execute the following code
         humidity = read_humidity()
@@ -66,7 +64,6 @@ def publish(): # The publish() method takes no parameters
         result = dweepy.dweet_for(thingTwoName, {"Humidity": humidity, "Light": light}) # Send a dweet from a specific thing called TestThin$
         print("TestThingTwo published: " + str(result)) # Print the variable called result
         time.sleep(1) # Call the sleep() method from the time module and pass in 1 second as a parameter
-        num = num + 1 # Increment the variable called num by 1
         print("")
     print("Publishing Ending!") # Print Publishing Ending!
 
