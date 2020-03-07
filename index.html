@@ -3,17 +3,26 @@
     <head>
         <meta charset="utf-8">
         <title>Bidirectional Communication Application</title>
+        <link rel="stylesheet" href="index.css">
         <script src="http://dweet.io/client/dweet.io.min.js"></script>
     </head>
     <body>
         <div align="center">
             <h1>Bidirectional Communication Application</h1>
-            <button onclick="sendDweet()">Click me</button>
+        </div>
+        <div align="center">
+            <a class="button" onclick="sendDweet()"></a>
         </div>
         <script>
+        var on = false;
             function sendDweet() {
-                dweetio.dweet_for("TestThingOne", {ButtonClicked: "True"}, function(err, dweet){
-                    console.log(dweet.thing); // "my-thing"
+                if (on == false) {
+                    on = true;
+                } else {
+                    on = false;
+                }
+                dweetio.dweet_for("TestThingOne", {ButtonClicked: on}, function(err, dweet){
+                    console.log(dweet.thing); // "TestThingOne"
                     console.log(dweet.content); // The content of the dweet
                     console.log(dweet.created); // The create date of the dweet
                 });
