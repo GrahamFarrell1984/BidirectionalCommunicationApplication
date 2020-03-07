@@ -53,12 +53,14 @@ def listen(publisher_thread): # The listen() method takes the publisher thread a
         print("Reading from TestThingTwo: " + str(content))
         print(thing) # Print the variable called thing
         print("")
-        if str(button_clicked) == 1:
-            brightness = 255
-        else:
-            brightness = 0
-        grovepi.analogWrite(led,brightness) # Give PWM output to LED
-
+        try:
+            if str(button_clicked) == 1:
+                brightness = 255
+            else:
+                brightness = 0
+                grovepi.analogWrite(led,brightness) # Give PWM output to LED
+        except:
+            print("An exception occurred")
     print("Listening Ending!") # Print Listening Ending!
 
 # Method to publish dweets from a specific thing called TestThingOne
