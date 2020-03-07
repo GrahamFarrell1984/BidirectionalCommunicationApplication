@@ -45,6 +45,7 @@ def listen(publisher_thread): # The listen() method takes the publisher thread a
     if not publisher_thread.is_alive(): # If publisher thread is not running execute the following code
         publisher_thread.start() # Start publisher thread
     for dweet in dweepy.listen_for_dweets_from(thingTwoName): # For loop listens for dweets from a specific thing called TestThingTwo
+        print("Button Clicked: " + str(button_clicked))
         content = dweet["content"] # Store the content from each dweet into a variable called content
         print(str(content))
         try:
