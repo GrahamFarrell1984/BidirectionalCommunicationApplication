@@ -41,7 +41,7 @@ def listen(publisher_thread): # The listen() method takes the publisher thread a
     global publisher_state # Set publisher state as a global variable
     publisher_state = True # Set publisher state to true
     global button_clicked
-    print(str(button_clicked))
+    print("Button Clicked: " + str(button_clicked))
     if not publisher_thread.is_alive(): # If publisher thread is not running execute the following code
         publisher_thread.start() # Start publisher thread
     for dweet in dweepy.listen_for_dweets_from(thingTwoName): # For loop listens for dweets from a specific thing called TestThingTwo
@@ -60,7 +60,7 @@ def listen(publisher_thread): # The listen() method takes the publisher thread a
             if str(button_clicked) == 1:
                 brightness = 255
             else:
-                brightness = 0
+                brightness = 255
                 grovepi.analogWrite(led,brightness) # Give PWM output to LED
         except:
             print("An exception occurred")
