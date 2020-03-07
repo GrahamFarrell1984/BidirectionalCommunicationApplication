@@ -43,6 +43,7 @@ def listen(publisher_thread): # The listen() method takes the publisher thread a
         publisher_thread.start() # Start publisher thread
     for dweet in dweepy.listen_for_dweets_from(thingTwoName): # For loop listens for dweets from a specific thing called TestThingTwo
         content = dweet["content"] # Store the content from each dweet into a variable called content
+        print(str(content))
         button_clicked = content["ButtonClicked"]
         print("Button Clicked: " + str(button_clicked))
         thing = dweet["thing"] # Store the thing from each dweet into a variable called thing
