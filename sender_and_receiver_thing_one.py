@@ -59,7 +59,8 @@ def listen(publisher_thread): # The listen() method takes the publisher thread a
         print("")
 
         try:
-            if str(button_clicked) == "1":
+            print("Button Clicked: " + str(button_clicked))
+            if int(button_clicked) == 1:
                 brightness = 255
             else:
                 brightness = 0
