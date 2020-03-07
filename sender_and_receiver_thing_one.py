@@ -61,7 +61,7 @@ def listen(publisher_thread): # The listen() method takes the publisher thread a
             if str(button_clicked) == 1:
                 brightness = 255
             else:
-                brightness = 255
+                brightness = 0
                 grovepi.analogWrite(led,brightness) # Give PWM output to LED
         except:
             print("An exception occurred")
