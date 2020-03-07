@@ -39,6 +39,7 @@ def listen(publisher_thread): # The listen() method takes the publisher thread a
     print(listener_thread_name + " is Listening!") # Print Starting Listening!
     global publisher_state # Set publisher state as a global variable
     publisher_state = True # Set publisher state to true
+    global button_clicked
     if not publisher_thread.is_alive(): # If publisher thread is not running execute the following code
         publisher_thread.start() # Start publisher thread
     for dweet in dweepy.listen_for_dweets_from(thingTwoName): # For loop listens for dweets from a specific thing called TestThingTwo
