@@ -14,12 +14,12 @@
             <a class="button" onclick="sendDweet()"></a>
         </div>
         <script>
-        var on = false;
+        var on = 0;
             function sendDweet() {
-                if (on == false) {
-                    on = true;
+                if (on == 0) {
+                    on = 1;
                 } else {
-                    on = false;
+                    on = 0;
                 }
                 dweetio.dweet_for("TestThingTwo", {ButtonClicked: on}, function(err, dweet){
                     console.log(dweet.thing); // "TestThingTwo"
