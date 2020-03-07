@@ -20,6 +20,7 @@ led = 6 # Connect the LED to digital port D6
 grovepi.pinMode(led,"OUTPUT") # Set pin mode for port D6 as an output
 
 publisher_state = False # Set the publisher state to false. This is used in the while loop in the publish() method
+button_clicked = 0
 
 def read_temperature():
     [ temp_sensor_value,hum_sensor_value ] = dht(dht_sensor,dht_sensor_type) # Read the temperature and humidity sensor values
