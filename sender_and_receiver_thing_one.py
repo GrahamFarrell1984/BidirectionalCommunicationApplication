@@ -49,11 +49,11 @@ def listen(publisher_thread): # The listen() method takes the publisher thread a
         print("Reading from TestThingTwo: " + str(content))
         print(thing) # Print the variable called thing
         print("")
-        # if button_clicked:
-        #     brightness = 1
-        # else:
-        #     brightness = 0
-        # grovepi.analogWrite(led,brightness) # Give PWM output to LED
+        if button_clicked:
+            brightness = 255
+        else:
+            brightness = 0
+        grovepi.analogWrite(led,brightness) # Give PWM output to LED
 
     print("Listening Ending!") # Print Listening Ending!
 
