@@ -63,6 +63,7 @@ def listen(publisher_thread): # The listen() method takes the publisher thread a
             if int(button_clicked) == 1:
                 print("True")
                 brightness = 255
+                grovepi.analogWrite(led,brightness) # Give PWM output to LED
             else:
                 print("False")
                 brightness = 0
