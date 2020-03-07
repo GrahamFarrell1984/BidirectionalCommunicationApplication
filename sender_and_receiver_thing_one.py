@@ -16,6 +16,9 @@ grovepi.pinMode(sound_sensor,"INPUT") # Set pin mode for port A2 as an input
 potentiometer_sensor = 1 # Connect the Grove Rotary Angle Sensor to analog port A1
 grovepi.pinMode(potentiometer_sensor,"INPUT") # Set pin mode for port A1 as an input
 
+led = 6 # Connect the LED to digital port D6
+grovepi.pinMode(led,"OUTPUT") # Set pin mode for port D6 as an output
+
 publisher_state = False # Set the publisher state to false. This is used in the while loop in the publish() method
 
 def read_temperature():
@@ -40,10 +43,18 @@ def listen(publisher_thread): # The listen() method takes the publisher thread a
         publisher_thread.start() # Start publisher thread
     for dweet in dweepy.listen_for_dweets_from(thingTwoName): # For loop listens for dweets from a specific thing called TestThingTwo
         content = dweet["content"] # Store the content from each dweet into a variable called content
+        button_clicked = content["ButtonClicked"]
+        print("Button Clicked: " + str(button_clicked))
         thing = dweet["thing"] # Store the thing from each dweet into a variable called thing
         print("Reading from TestThingTwo: " + str(content))
         print(thing) # Print the variable called thing
         print("")
+        # if button_clicked:
+        #     brightness = 1
+        # else:
+        #     brightness = 0
+        # grovepi.analogWrite(led,brightness) # Give PWM output to LED
+
     print("Listening Ending!") # Print Listening Ending!
 
 # Method to publish dweets from a specific thing called TestThingOne

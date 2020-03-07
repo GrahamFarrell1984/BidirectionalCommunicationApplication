@@ -14,7 +14,7 @@ light_sensor = 0 # Connect the Grove Light Sensor to analog port A0
 grovepi.pinMode(light_sensor,"INPUT") # Set pin mode for port A0 as an input
 
 led = 5 # Connect the LED to digital port D5
-grovepi.pinMode(led,"OUTPUT") # Set pin mode for port D5 as an input
+grovepi.pinMode(led,"OUTPUT") # Set pin mode for port D5 as an output
 
 adc_ref = 5 # Reference voltage of ADC is 5v
 
@@ -51,6 +51,7 @@ def listen(publisher_thread): # The listen() method takes the publisher thread a
         voltage = round((float)(sensor_value) * adc_ref / 1023, 2) # Calculate voltage
         degrees = round((voltage * full_angle) / grove_vcc, 2) # Calculate rotation in degrees (0 to 300)
         brightness = int(degrees / full_angle * 255) # Calculate LED brightess (0 to 255) from degrees (0 to 300)
+        print("Brightness: " + str(brightness))
         grovepi.analogWrite(led,brightness) # Give PWM output to LED
 
     print("Listening Ending!") # Print Listening Ending!
