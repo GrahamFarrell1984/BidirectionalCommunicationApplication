@@ -41,16 +41,16 @@ def listen(publisher_thread): # The listen() method takes the publisher thread a
     global publisher_state # Set publisher state as a global variable
     publisher_state = True # Set publisher state to true
     global button_clicked
-    print("Button Clicked: " + str(button_clicked))
+    print("Button Clicked 1: " + str(button_clicked))
     if not publisher_thread.is_alive(): # If publisher thread is not running execute the following code
         publisher_thread.start() # Start publisher thread
     for dweet in dweepy.listen_for_dweets_from(thingTwoName): # For loop listens for dweets from a specific thing called TestThingTwo
-        print("Button Clicked: " + str(button_clicked))
+        print("Button Clicked 2: " + str(button_clicked))
         content = dweet["content"] # Store the content from each dweet into a variable called content
         print(str(content))
         try:
             button_clicked = content["ButtonClicked"]
-            print("Button Clicked: " + str(button_clicked))
+            print("Button Clicked 3: " + str(button_clicked))
         except:
             print("An exception occurred")
         thing = dweet["thing"] # Store the thing from each dweet into a variable called thing
@@ -60,7 +60,6 @@ def listen(publisher_thread): # The listen() method takes the publisher thread a
 
         try:
             print("Button Clicked String: " + str(button_clicked))
-            print("Button Clicked Integer: " + int(button_clicked))
             if int(button_clicked) == 1:
                 print("True")
                 brightness = 255
