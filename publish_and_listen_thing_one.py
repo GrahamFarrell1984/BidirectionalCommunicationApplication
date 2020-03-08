@@ -77,7 +77,7 @@ def publish(): # The publish() method takes no parameters
         temperature = read_temperature() # Call the read_temperature() function / method and store result in a variable called temperature
         sound = read_sound() # Call the read_sound() function / method and store result in a variable called sound
         potentiometer = read_potentiometer() # Call the read_potentiometer() function / method and store result in a variable called potentiometer
-        result = dweepy.dweet_for(thingOneName, {"Temperature": temperature, "Sound": sound, "Potentiometer": potentiometer}) # Send a dweet$
+        result = dweepy.dweet_for(thingOneName, {"Temperature": temperature, "Sound": sound - 50, "Potentiometer": potentiometer}) # Send a dweet$
         print("GrahamThingOne published: " + str(result)) # Print the variable called result
         time.sleep(1) # Call the sleep() method from the time module and pass in 1 second as a parameter
         print("") # Adds an empty line in the terminal below our output above
