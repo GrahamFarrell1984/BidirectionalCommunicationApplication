@@ -1,2 +1,2 @@
-thingOneName = 'TestThingOne'
-thingTwoName = 'TestThingTwo'
+thingOneName = 'GrahamThingOne'
+thingTwoName = 'GrahamThingTwo'
