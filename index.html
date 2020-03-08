@@ -4,11 +4,47 @@
         <meta charset="utf-8">
         <title>Bidirectional Communication Application - CA1</title>
         <link rel="stylesheet" href="index.css">
+        <script src="https://kit.fontawesome.com/5e2e6a0fd1.js" crossorigin="anonymous"></script>
         <script src="http://dweet.io/client/dweet.io.min.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     </head>
     <body>
         <div align="center">
             <h1>Bidirectional Communication Application - CA1</h1>
+        </div>
+        <div align="center" class="thingOne">
+            <table>
+              <tr>
+                <th>Thing Name <i class="fas fa-robot"></i></th>
+                <th>Temperature <i class="fas fa-thermometer-half"></i></th>
+                <th>Decibels <i class="fas fa-volume-up"></i></th>
+                <th>Potentiometer <i class="fas fa-sync-alt"></i></th>
+                <th>Last Updated <i class="fas fa-clock"></i></th>
+              </tr>
+              <tr>
+                <td id="thingOneNameTableData">---</td>
+                <td id="temperatureTableData">---</td>
+                <td id="decibelsTableData">---</td>
+                <td id="potentiometerTableData">---</td>
+                <td id="thingOneLastUpdatedTableData">---</td>
+              </tr>
+            </table>
+        </div>
+        <div align="center" class="thingTwo">
+            <table>
+              <tr>
+                <th>Thing Name <i class="fas fa-robot"></i></th>
+                <th>Humidity <i class="fas fa-cloud-rain"></i></th>
+                <th>Light <i class="fas fa-lightbulb"></i></th>
+                <th>Last Updated <i class="fas fa-clock"></i></th>
+              </tr>
+              <tr>
+                <td id="thingTwoNameTableData">---</td>
+                <td id="humidityTableData">---</td>
+                <td id="lightTableData">---</td>
+                <td id="thingTwoLastUpdatedTableData">---</td>
+              </tr>
+            </table>
         </div>
         <div align="center">
             <h2>Press the Big Red Button to send a Dweet!</h2>
@@ -30,6 +66,47 @@
                     console.log(dweet.created); // The creation date of the dweet
                 });
             }
+        </script>
+        <script>
+            $(document).ready(function() {
+                dweetio.listen_for("GrahamThingOne", function(dweet) {
+
+                    console.log(dweet.thing);
+                    console.log(dweet.content);
+                    console.log(dweet.created);
+
+                    thingOneName = dweet.thing
+                    temperature = dweet.content["Temperature"]
+                    decibels = dweet.content["Sound"]
+                    potentiometer = dweet.content["Potentiometer"]
+                    created = dweet.created
+
+                    document.getElementById("thingOneNameTableData").innerHTML = thingOneName;
+                    document.getElementById("temperatureTableData").innerHTML = temperature + " C";
+                    document.getElementById("decibelsTableData").innerHTML = decibels + " dB";
+                    document.getElementById("potentiometerTableData").innerHTML = potentiometer;
+                    document.getElementById("thingOneLastUpdatedTableData").innerHTML = created.toUTCString();
+
+                });
+
+                dweetio.listen_for("GrahamThingTwo", function(dweet) {
+
+                    console.log(dweet.thing);
+                    console.log(dweet.content);
+                    console.log(dweet.created);
+
+                    thingTwoName = dweet.thing
+                    humidity = dweet.content["Humidity"]
+                    light = dweet.content["Light"]
+                    created = dweet.created
+
+                    document.getElementById("thingTwoNameTableData").innerHTML = thingTwoName;
+                    document.getElementById("humidityTableData").innerHTML = humidity + " %";
+                    document.getElementById("lightTableData").innerHTML = light + " lm";
+                    document.getElementById("thingTwoLastUpdatedTableData").innerHTML = created.toUTCString();
+
+                });
+            });
         </script>
     </body>
 </html>
