@@ -46,7 +46,6 @@ def listen(publisher_thread): # The listen() method takes the publisher thread a
     for dweet in dweepy.listen_for_dweets_from(thingOneName): # For loop listens for dweets from a specific thing called GrahamThingOne
         content = dweet["content"] # Store the content from each dweet into a variable called content
         sensor_value = content["Potentiometer"] # Get the value from the potentiometer
-        print("Potentiometer Reading: " + str(sensor_value)) # Print the value from the potentiometer
         thing = dweet["thing"] # Store the thing from each dweet into a variable called thing
         print("Reading from " + str(thing) + ": " + str(content))
         print("") # Adds an empty line in the terminal below our output above
